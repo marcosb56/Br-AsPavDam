@@ -1,0 +1,9 @@
+names:
+  0: Fissures
+  1: Shoving
+  2: Ravelling
+  3: Pothole
+  4: Patch
+path: /content/drive/MyDrive/Colab Notebooks/Br-AsPavDam
+train: images/train
+val: images/val

@@ -1,0 +1,14 @@
+# Dataset BR-AsPavDam (original) - configuração para YOLO
+# Caminhos corrigidos para a nova estrutura
+
+path: /content/drive/MyDrive/Colab Notebooks/Br-AsPavDam/Br-AsPavDam (original)
+
+train: images/train
+val: images/val
+
+names:
+  0: Fissures
+  1: Shoving
+  2: Ravelling
+  3: Pothole
+  4: Patch
