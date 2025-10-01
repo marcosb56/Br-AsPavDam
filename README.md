@@ -44,10 +44,7 @@ python scripts/train.py \
 python scripts/val.py --weights runs/train/exp/weights/best.pt --conf 0.25 --iou 0.50
 Results (Summary)
 100 epochs (Approach 3): mAP@50 = 84.3%
-We release the trained weights and evaluation artifacts under GitHub Releases (see the latest tag).
 Notes: Reported metrics follow YOLOv5’s standard evaluation (P/R, mAP@50, mAP@50:95). Be mindful of the data imbalance (very few Deformations) and consider class-aware weighting/augmentations for further improvements.
-Weights & Artifacts
-Weights (100 epochs): released in Releases (attach best.pt and last.pt)
 
 How to Cite
 
