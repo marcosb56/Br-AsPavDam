@@ -30,34 +30,17 @@ Approach: 100 (patience=20), bootstrap on validation (100 resamples)
 Augmentations: horizontal flip; small rotations (±5°); HSV/brightness/contrast jitter; Gaussian noise; motion blur; gamma correction; CLAHE; realistic shadows (all label-preserving)
 Class imbalance: targeted oversampling (synthetic variants) until desired per-class frequencies (Approaches 2–3)
 Eval thresholds: --conf 0.25, --iou 0.50 (unless otherwise stated)
-Notebook: BR-AsPavDam - train.ipynb (Cell 1 overview)
-The first cell implements an end-to-end pipeline with the following numbered steps (headings appear in the cell):
-Mounts Google Drive and defines paths for data, labels, YOLOv5 repo, config and pretrained weights.
-Helper functions: a safe run() wrapper for subprocess calls; count_boxes() to inspect per-class counts; a light simple_aug() for on-the-fly synthetic variants.
-Config check/update: ensures the YAML points to 5 classes and the correct names.
-Oversampling (classes 0–2): generates augmented images/TXT copies until a minimum target of boxes per class is met (ensuring ≥ ~300 boxes for {Fissures, Shoving, Ravelling}, as indicated no cabeçalho).
-Hyperparameters: centralizes training knobs (epochs, batch, imgsz, patience, run name).
-YOLOv5 repo: clones a clean copy if absent.
-Sanity checks: validates existence of folders/files, prints box counts before/after oversampling.
-Training: runs train.py with the specified IMSC checkpoint and hyperparameters.
-Validation: runs detect.py on the images/val set with --conf 0.1, storing predictions under results/<run_name>.
-This design guarantees a single-cell, deterministic bootstrap: from data checks → oversampling → train → quick qualitative validation (sample predictions saved).
-Quickstart
 
-# 1) Environment
-conda env create -f environment.yml
-conda activate br-aspavdam
-
-# 2) IMSC weights
+# 1) IMSC weights
 bash scripts/download_IMSC_grddc2020_weights.sh  # puts last_100_100_640_16.pt under yolov5/weights/IMSC/
 
-# 3) Train (repro settings)
+# 2) Train (repro settings)
 python scripts/train.py \
   --data configs/br-aspavdam.yaml \
   --weights yolov5/weights/IMSC/last_100_100_640_16.pt \
   --imgsz 640 --batch 16 --epochs 100 
 
-# 4) Evaluate
+# 3) Evaluate
 python scripts/val.py --weights runs/train/exp/weights/best.pt --conf 0.25 --iou 0.50
 Results (Summary)
 100 epochs (Approach 3): mAP@50 = 84.3%
